@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useRouter } from 'next/router'
 import { IoArrowBackOutline } from "react-icons/io5";
-import { useUserDataApi } from "../../../utils/hooks/useUserDataApi"
-import { useChatApi } from "../../../utils/hooks/useChatApi"
+import { useUserDataApi } from "../../utils/hooks/useUserDataApi"
+import { useChatApi } from "../../utils/hooks/useChatApi"
 import Link from 'next/link'
 
 const Chatroom = ({ searchParams }) => {
