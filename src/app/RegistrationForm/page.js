@@ -28,11 +28,11 @@ const RegistrationForm = () => {
             const imageForm = new FormData()
             imageForm.append('file', formData.image)
 
-            const imageRes = await fetch("https://chat-burst.vercel.app/api/image", {
+            const imageRes = await fetch("http://localhost:3000/api/image", {
                 method: "POST",
                 body: imageForm
             })
-            const res = await fetch("https://chat-burst.vercel.app/api/userData", {
+            const res = await fetch("http://localhost:3000/api/userData", {
                 method: "POST",
                 body: JSON.stringify({
                     name: formData.name,

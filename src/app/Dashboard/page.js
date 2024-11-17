@@ -26,9 +26,12 @@ const Dashboard = () => {
     const goToLogin = () => {
         router.push('/Login')
     }
-    const goToChat = () => {
+    const goToChat = (datas) => {
         if(loginUser && !loginUser.email){
             router.push('/Login')
+        }
+        else{
+            router.push({ pathname: `/Chatroom/${datas.email}`, query: datas })
         }
         
     }
@@ -47,7 +50,7 @@ const Dashboard = () => {
                         return (
                                 <div key={datas.name} className='m-[1%] flex flex-col items-center justify-center '>
                                     <Link href={{ pathname: `/Chatroom/${datas.email}`, query: datas }}>
-                                        <div onClick={goToChat} className='object-contain'> <img src={`/${datas.imageName}`} className='h-24 w-24 max-[750px]:h-20 max-[750px]:w-20 max-[285px]:w-16 max-[285px]:h-16 rounded-full zoom cursor-pointer' /></div>
+                                        <div className='object-contain'> <img src={`/${datas.imageName}`} className='h-24 w-24 max-[750px]:h-20 max-[750px]:w-20 max-[285px]:w-16 max-[285px]:h-16 rounded-full zoom cursor-pointer' /></div>
                                     </Link>
                                     <p className='p-[1%] w-34 max-[350px]:w-20 max-[285px]:w-16 text-white goblin text-xl  max-[750px]:text-lg truncate flex items-center justify-center'><span className='cursor-pointer'>{datas.name}</span></p>
                                 </div>
