@@ -7,7 +7,6 @@ import { IoArrowBackOutline } from "react-icons/io5";
 import { useUserDataApi } from "../../../utils/hooks/useUserDataApi"
 import { useChatApi } from "../../../utils/hooks/useChatApi"
 import Link from 'next/link'
-import { useLayoutEffect } from 'react';
 
 const Chatroom = ({ searchParams }) => {
     const router = useRouter()
@@ -16,23 +15,14 @@ const Chatroom = ({ searchParams }) => {
     const [listner, setListner] = useState(false)
     const [chat, setChat] = useState("")
     const [userChat, setUserChat] = useState(null)
-    const loginUser = JSON.parse(localStorage.getItem('logindata'));
-    useLayoutEffect(() => {
-
-        if(loginUser && !loginUser.email){
-           return router.push('/Login')
-        }
-        else if(!loginUser){
-            return router.push('/Login')
-        }
-        else{
-
-        }
-      }, [])
+    const [loginUser, setLoginUser] = useState(null)
+  
     useEffect(() => {
         (async () => {
             const data = await useUserDataApi();
             const allChats = await useChatApi()
+            const logindata = JSON.parse(window.localStorage.getItem('logindata'));
+            setLoginUser(logindata)
             const { name, email } = await searchParams
             setSearch({
                 email,
@@ -74,12 +64,12 @@ const Chatroom = ({ searchParams }) => {
                 <div className="w-[60%] max-[450px]:w-full max-[450px]:min-h-screen max-[600px]:w-[90%] h-[540px] max-[450px]:h-full max-[750px]:h-[450px] bg-[#1c1c20] rounded-xl  ">
                     <div className="w-full border-[#727272] border-b-[1px] p-[1%]  max-[450px]:p-[2%] rounded-t-xl flex items-center gap-[1%]">
                         <Link href={"/Dashboard"}>
-                        <IoArrowBackOutline className="text-white mr-[2%]"/>
+                            <IoArrowBackOutline className="text-white mr-[2%]" />
                         </Link>
                         {
                             filterRandomUser && filterRandomUser.map((userRandom) => {
                                 return (
-                                    <div className="flex w-full items-center gap-[1%]" key="mapOne">
+                                    <div className="flex w-full items-center gap-[1%]" key={userRandom.name}>
                                         <Image src={`/${userRandom.imageName}`} width={20} height={20} className="w-10 max-[450px]:w-8 h-10 max-[450px]:h-8 rounded-full" alt="hey" />
                                         <p className="text-white lobster max-[450px]:ml-2 ml-4">{userRandom.name}</p>
                                     </div>
@@ -90,7 +80,7 @@ const Chatroom = ({ searchParams }) => {
                     <div className="w-full h-4/5 max-[450px]:min-h-screen max-[750px]:min-h-[75%] p-[1%] gap-[2%] flex flex-col overflow-y-scroll max-[450px]:overflow-hidden">
                         {filterChats && filterChats.map((data) => {
                             return (
-                                <div key="mapTewo" className={`w-full flex p-[1%] ${loginUser.name === data.name && "justify-end"} `}>
+                                <div key={data.name} className={`w-full flex p-[1%] ${loginUser.name === data.name && "justify-end"} `}>
                                     <div className={`max-w-[70%] max-[450px]:my-[4px] max-[450px]:max-w-[80%] p-[2%]  max-[450px]:text-[14px]  max-[350px]:text-[12px] bg-indigo-400 rounded text-white lobster ${loginUser.email === data.email && "bg-indigo-600"}`}>{data.chat}</div>
                                 </div>
 

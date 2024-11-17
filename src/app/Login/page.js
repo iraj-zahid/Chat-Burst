@@ -26,7 +26,7 @@ const Login = () => {
         console.log(filterLoginData)
         if(filterLoginData.length > 0){
             router.push('/Dashboard')
-            localStorage.setItem("logindata", JSON.stringify({email:filterLoginData[0].email, name:filterLoginData[0].name}));
+            window.localStorage.setItem("logindata", JSON.stringify({email:filterLoginData[0].email, name:filterLoginData[0].name}));
 
         }
         else{
