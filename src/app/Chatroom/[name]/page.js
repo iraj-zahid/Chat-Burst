@@ -45,7 +45,7 @@ const Chatroom = ({ searchParams }) => {
             setListner(!listner)
             setChat("")
 
-            const res = await fetch("http://localhost:3000/api/chat", {
+            const res = await fetch("https://chat-burst.vercel.app/api/chat", {
                 method: "POST",
                 body: JSON.stringify({
                     chat: chat,
