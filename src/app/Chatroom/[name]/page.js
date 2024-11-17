@@ -46,6 +46,7 @@ const Chatroom = ({ searchParams }) => {
             setChat("")
 
             const res = await fetch("https://chat-burst.vercel.app/api/chat", {
+                
                 method: "POST",
                 body: JSON.stringify({
                     chat: chat,
