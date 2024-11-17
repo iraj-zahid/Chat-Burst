@@ -1,21 +1,81 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Goblin+One&family=Hubot+Sans:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&family=Goblin+One&family=Hubot+Sans:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&family=Alegreya:ital,wght@0,400..900;1,400..900&family=Goblin+One&family=Hubot+Sans:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+.colour{
+color: #101014;
+/* color: #1c1c20; nav */
+color: #36363d;
+color: #727272; 
+color: #6366F1;
+color: #a563f1;
+color:  #f2f3f2;
+color:  #00000085;
+}
+.formUIImg{
+  background-image: url("../../public/ChatBurstAssets/purple.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.goblin {
+  font-family: "Goblin One", serif;
+}
+.algeria{
+  font-family: "Alegreya", serif;
+}
+.balu {
+  font-family: "Alegreya Sans SC", sans-serif;
+
+}
+.spicy {
+  font-family: "Lobster Two", sans-serif;
+  
+}
+.mobileFire{
+  background-image: url("../../public/ChatBurstAssets/purpleFirePng.png");
+  background-position:center top;
+  background-size: auto;
+}
+.gif{
+  background-image: url("../../public/ChatBurstAssets/gif.gif");
+  background-size: 130px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.zoom:hover {
+  transform: scale(1.1);
+}
+.zoom {
+  transition: transform 0.5s;
+}
+.bgChatRoom{
+  background-image: url("../../public/ChatBurstAssets/download");
+  background-position: center;
+  background-size: cover;
+  
+}
+.lobster {
+  font-family: "Lobster Two", serif;
+  font-weight: 400;
+  font-style: italic;
+}
+::-webkit-scrollbar {
+  width: 10px;
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
