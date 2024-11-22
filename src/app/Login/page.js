@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation'
 import { useUserDataApi } from "../../utils/hooks/useUserDataApi"
-import { useLayoutEffect } from 'react';
 import Link from 'next/link'
 
 const Login = () => {
@@ -39,7 +38,7 @@ const Login = () => {
     return (
         <>
             <div className="w-full h-screen py-[4%] px-[15%] max-[400px]:p-0 max-[909px]:px-[4%] bg-[#101014]">
-                <div className="min-[400px]:hidden w-full bg-no-repeat">
+                <div className="min-[400px]:hidden max-[550px]:pt-[4%] w-full bg-no-repeat">
                     <div className='w-full p-[3%] flex flex-col items-center justify-center'>
                         <div className='w-[50%] p-[20%] gif bg-no-repeat bg-center bg-contain'></div>
                         <div className='w-full flex items-center justify-center'><p className='goblin text-white text-2xl p-[5%]'>THE CHATBURST</p></div>
@@ -56,7 +55,7 @@ const Login = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="w-[50%] max-[350px]:w-[80%] flex items-cente justify-center">
+                    <div className="w-[50%] max-[350px]:w-[80%] max-[360px]:h-[540px] flex items-cente justify-center">
                         <section className="w-full p-[2%] max-[350px]:pb-[7%] max-[350px]:px-[3%] max-[400px]:pt-[8%] flex flex-col items-center justify-center">
                             <p className="goblin text-white text-3xl max-[580px]:text-xl">Let's Login</p>
                             <div className="w-full p-[4%] max-[350px]:py-[12%] max-[350px]:px-[1%] max-[400px]:mt-[12%]">

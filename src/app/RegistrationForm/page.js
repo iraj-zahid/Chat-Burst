@@ -1,7 +1,8 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
+import { useBase64 } from '@/utils/hooks/useBase64';
 
 import confetti from 'canvas-confetti';
 const RegistrationForm = () => {
@@ -13,13 +14,16 @@ const RegistrationForm = () => {
         email: null,
         password: null,
         image: null,
-        imageName: null
+        imageName: null,
+        imageBase:null
     })
-    const takingImageFunction = (event) => {
+    const takingImageFunction = async (event) => {
+        const base64 = await useBase64(event.target.files[0])
         setFormData((e) => ({
-            ...e, image: event.target.files[0], imageName: event.target.files[0].name
+            ...e, image: event.target.files[0], imageName: event.target.files[0].name, imageBase:base64.toString()
         }))
         setError(false)
+
     }
     const submit = async () => {
         if (formData.name && formData.password.length > 6 && formData.imageName && gmailRegex.test(formData.email)) {
@@ -38,7 +42,8 @@ const RegistrationForm = () => {
                     name: formData.name,
                     email: formData.email,
                     password: formData.password,
-                    imageName: formData.imageName
+                    imageName: formData.imageName,
+                    imageBase:formData.imageBase,
                 })
             })
         }
@@ -60,15 +65,15 @@ const RegistrationForm = () => {
 
     return (
         <>
-            <div className="w-full h-screen py-[4%] px-[15%] max-[400px]:p-0 max-[909px]:px-[4%] bg-[#101014]">
-                <div className="min-[400px]:hidden w-full bg-no-repeat">
+            <div className="w-full min-h-screen py-[4%] px-[15%] max-[400px]:p-0 max-[909px]:px-[4%] bg-[#101014]">
+                <div className="min-[500px]:hidden w-full bg-no-repeat">
                     <div className='w-full p-[3%] flex flex-col items-center justify-center'>
                         <div className='w-[50%] p-[20%] gif bg-no-repeat bg-center bg-contain'></div>
                         <div className='w-full flex items-center justify-center'><p className='goblin text-white text-2xl p-[5%]'>THE CHATBURST</p></div>
                     </div>
                 </div>
-                <div className="w-full rounded-3xl max-[400px]:rounded-tl-[50px] max-[400px]:rounded-tr-[50px] max-[400px]:rounded-bl-[0px] max-[400px]:rounded-br-[0px] bg-[#33333a] flex items-cente justify-center">
-                    <div className="max-[400px]:hidden w-[50%] h-[498px] rounded-3xl rounded-tr-[10%] rounded-br-[10%] formUIImg bg-no-repeat relative text-[#f2f3f2] ">
+                <div className="w-full rounded-3xl max-[400px]:rounded-tl-[50px] max-[400px]:rounded-tr-[50px] max-[400px]:rounded-bl-[0px] max-[400px]:rounded-br-[0px] bg-[#33333a] flex items-cente justify-center max-[450px]:p-[8%] ">
+                    <div className="max-[500px]:hidden w-[50%] h-[498px] rounded-3xl rounded-tr-[10%] rounded-br-[10%] formUIImg bg-no-repeat relative text-[#f2f3f2] ">
                         <div className='w-full p-[1%] rounded-lg h-[498px] absolute flex bg-[#0e0e0e7c] rounded-tr-[10%] rounded-br-[10%] '>
                             <div className='w-[70%] max-[695px]:w-[90%] absolute top-[15%] left-[5%] p-[2%] rounded-lg bg-[#000000b9]'>
                                 <p className='text-xl goblin font-bold my-[1%] max-[1060px]:text-md '>The ChatBurst</p>
@@ -78,10 +83,10 @@ const RegistrationForm = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="w-[50%] max-[350px]:w-[80%] flex items-cente justify-center">
-                        <section className="w-full p-[2%] max-[350px]:pb-[7%] max-[350px]:px-[3%] max-[400px]:pt-[8%] flex flex-col items-center justify-center">
-                            <p className="goblin text-white text-3xl max-[580px]:text-xl">Let's Connect</p>
-                            <div className="w-full p-[4%] max-[350px]:py-[12%] max-[350px]:px-[1%] max-[400px]:mt-[12%]">
+                    <div className="w-[50%] max-[500px]:w-full max-[500px]:h-screen flex items-cente justify-center">
+                        <section className="w-full p-[2%] max-[350px]:pb-[7%] max-[350px]:px-[3%] max-[400px]:pt-[0%] flex flex-col items-center justify-center">
+                            <p className="goblin text-white text-3xl max-[580px]:text-xl max-[450px]:mt-[8%]">Let's Connect</p>
+                            <div className="w-full p-[4%] max-[450px]:pb-[12%] max-[450px]:pt-[0%] max-[350px]:px-[1%] max-[400px]:mt-[12%]">
                                 <div className="w-full flex flex-col items-center justify-center" >
                                     <div className="relative z-0 w-full mb-5 group">
                                         <input autoComplete="off" onChange={(event) => {
@@ -119,7 +124,7 @@ const RegistrationForm = () => {
                                         </div>
                                     </div>
                                     {
-                                        error && <div className="flex items-center mb-4 text-sm text-red-400 dark:border-red-800" role="alert">
+                                        error && <div className={` flex items-center mb-4 text-sm text-red-400 dark:border-red-800`} role="alert">
                                             <svg className="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                                                 <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
                                             </svg>

@@ -2,40 +2,35 @@
 import { useRef } from "react";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useRouter } from 'next/navigation'
 import { IoArrowBackOutline } from "react-icons/io5";
-import { useUserDataApi } from "../../../utils/hooks/useUserDataApi"
-import { useChatApi } from "../../../utils/hooks/useChatApi"
-import Link from 'next/link'
+import { useUserDataApi } from "../../../utils/hooks/useUserDataApi";
+import { useChatApi } from "../../../utils/hooks/useChatApi";
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
-const Chatroom = ({ searchParams }) => {
-    const router = useRouter()
-    const data = router.query;
+const Chatroom = () => {
+    const searchParams = useSearchParams()
+    const email = searchParams.get('email')
     const [user, setUser] = useState(null)
-    const [search, setSearch] = useState(null)
     const [listner, setListner] = useState(false)
     const [chat, setChat] = useState("")
     const [userChat, setUserChat] = useState(null)
     const [loginUser, setLoginUser] = useState(null)
-    console.log("luup",search)
   
     useEffect(() => {
         (async () => {
+           
             const data = await useUserDataApi();
             const allChats = await useChatApi()
             const logindata = JSON.parse(window.localStorage.getItem('logindata'));
             setLoginUser(logindata)
-            const { name, email } = await searchParams
-            setSearch({
-                email,
-                name
-            })
+          
             data && setUser(data)
             allChats && setUserChat(allChats)
         })()
     }, [listner])
-    const filterRandomUser = user && search && user.filter((userData) => userData.name === search.name)
-    const filterChats = userChat && loginUser && userChat.filter((chatings) => chatings.email === search.email && chatings.name === loginUser.name || chatings.email === loginUser.email && chatings.name === search.name)
+    const filterRandomUser = user && email && user.filter((userData) => userData.email === email)
+    const filterChats = userChat && loginUser && userChat.filter((chatings) => chatings.email === email && chatings.name === loginUser.name || chatings.email === loginUser.email && chatings.name ===  filterRandomUser[0].name)
     const messagesEndRef = useRef(null)
     useEffect(() => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
@@ -52,7 +47,7 @@ const Chatroom = ({ searchParams }) => {
                 body: JSON.stringify({
                     chat: chat,
                     name: loginUser.name,
-                    email: searchParams.email
+                    email: email
                 })
             })
             console.log(res)
@@ -62,8 +57,8 @@ const Chatroom = ({ searchParams }) => {
 
     return (
         <>
-            <div className="bg-[#101014] w-full min-h-screen bg-no-repeat flex items-center justify-center">
-                <div className="w-[60%] max-[450px]:w-full max-[450px]:min-h-screen max-[600px]:w-[90%] h-[540px] max-[450px]:h-full max-[750px]:h-[450px] bg-[#1c1c20] rounded-xl  ">
+            <div className="bg-[#101014] w-full min-h-screen max-[450px]:h-screen bg-no-repeat flex max-[450px]:flex-1 items-center justify-center">
+                <div className="w-[60%] max-[450px]:min-h-[100%] max-[450px]:flex max-[450px]:flex-col max-[450px]:flex-1 max-[450px]:w-full max-[450px]:min-h-screen max-[600px]:w-[90%] h-[540px] max-[450px]:h-full max-[750px]:h-[450px] bg-[#1c1c20] rounded-xl  ">
                     <div className="w-full border-[#727272] border-b-[1px] p-[1%]  max-[450px]:p-[2%] rounded-t-xl flex items-center gap-[1%]">
                         <Link href={"/Dashboard"}>
                             <IoArrowBackOutline className="text-white mr-[2%]" />
@@ -79,10 +74,10 @@ const Chatroom = ({ searchParams }) => {
                             })
                         }
                     </div>
-                    <div className="w-full h-4/5 max-[450px]:min-h-screen max-[750px]:min-h-[75%] p-[1%] gap-[2%] flex flex-col overflow-y-scroll max-[450px]:overflow-hidden">
+                    <div className="w-full h-4/5 max-[450px]:flex-1 max-[750px]:min-h-[75%] p-[1%] gap-[2%] flex flex-col overflow-y-scroll max-[450px]:overflow-hidden">
                         {filterChats && filterChats.map((data) => {
                             return (
-                                <div key={data.name} className={`w-full flex p-[1%] ${loginUser.name === data.name && "justify-end"} `}>
+                                <div key={data._id} className={`w-full flex p-[1%] ${loginUser.name === data.name && "justify-end"} `}>
                                     <div className={`max-w-[70%] max-[450px]:my-[4px] max-[450px]:max-w-[80%] p-[2%]  max-[450px]:text-[14px]  max-[350px]:text-[12px] bg-indigo-400 rounded text-white lobster ${loginUser.email === data.email && "bg-indigo-600"}`}>{data.chat}</div>
                                 </div>
 

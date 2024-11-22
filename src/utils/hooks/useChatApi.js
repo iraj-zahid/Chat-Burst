@@ -6,7 +6,7 @@ const useChatApi = async () => {
     })
     return data && data.json()
   }catch(error){
-
+    return error
   }
 }
 

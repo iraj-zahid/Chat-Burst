@@ -6,7 +6,7 @@ const useUserDataApi = async () => {
     })
     return data && data.json()
   }catch(error){
-
+    return error
   }
 }
 
