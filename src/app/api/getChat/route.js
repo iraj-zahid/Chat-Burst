@@ -6,5 +6,4 @@ export const GET = async (req, res) => {
     await connectDB()
     const data = await Chat.find()
     return NextResponse.json(data)
-    console.log("alaska",data)
 }

@@ -6,6 +6,7 @@ import { IoLogInSharp } from "react-icons/io5";
 import { useUserDataApi } from '@/utils/hooks/useUserDataApi'
 
 const Dashboard = () => {
+    const router = useRouter()
     const [data, setData] = useState(null)
     const [loginUser, setLoginUser] = useState(null)
     useEffect(() => {
@@ -17,8 +18,6 @@ const Dashboard = () => {
         setLoginUser(logindata)
 
     }, [])
-    const router = useRouter()
-    console.log("login data", loginUser)
 
     const filterRandomUser = data && loginUser && data.filter((userData) => userData.name !== loginUser.name)
     const goToLogin = () => {

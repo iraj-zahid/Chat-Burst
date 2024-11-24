@@ -37,7 +37,6 @@ const Chatroom = () => {
     }, [userChat])
 
     const chatSubmit = async () => {
-
         if (chat.length > 0) {
             setListner(!listner)
             setChat("")
@@ -50,9 +49,7 @@ const Chatroom = () => {
                     email: email
                 })
             })
-            console.log(res)
         }
-
     }
 
     return (

@@ -22,16 +22,13 @@ const Login = () => {
     }, [])
     const filterLoginData = user && user.filter((data) => data.email === formData.email && data.password === formData.password && data.name === formData.name)
     const submit = () => {
-        console.log(filterLoginData)
         if(filterLoginData.length > 0){
             router.push('/Dashboard')
             window.localStorage.setItem("logindata", JSON.stringify({email:filterLoginData[0].email, name:filterLoginData[0].name}));
-
         }
         else{
             setError(true)
         }
-       console.log(user)
     }
 
 

@@ -29,13 +29,7 @@ const RegistrationForm = () => {
         if (formData.name && formData.password.length > 6 && formData.imageName && gmailRegex.test(formData.email)) {
             router.push('/Dashboard')
             localStorage.setItem("logindata", JSON.stringify({email:formData.email, name:formData.name}));
-            const imageForm = new FormData()
-            imageForm.append('file', formData.image)
 
-            const imageRes = await fetch("https://chat-burst.vercel.app/api/image", {
-                method: "POST",
-                body: imageForm
-            })
             const res = await fetch("https://chat-burst.vercel.app/api/userData", {
                 method: "POST",
                 body: JSON.stringify({
@@ -48,7 +42,6 @@ const RegistrationForm = () => {
             })
         }
         else { setError(true) }
-       
     }
 
     const confet = () => {
@@ -60,7 +53,6 @@ const RegistrationForm = () => {
             });
         }
         else { setError(true) }
-
     }
 
     return (

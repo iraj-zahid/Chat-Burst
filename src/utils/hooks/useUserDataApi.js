@@ -10,5 +10,4 @@ const useUserDataApi = async () => {
   }
 }
 
-
 export {useUserDataApi}
