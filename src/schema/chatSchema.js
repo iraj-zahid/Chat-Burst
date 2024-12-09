@@ -1,9 +1,18 @@
 import mongoose, {Schema} from "mongoose";
 
 const chatSchema = new Schema({
-    chat:String,
-    name:String,
-    email:String
+    chat:{
+        type: String,
+        require: true
+    },
+    name:{
+        type: String,
+        require: true
+    },
+    email:{
+        type: String,
+        require: true
+    }
 },
 {
     timestamps:true
