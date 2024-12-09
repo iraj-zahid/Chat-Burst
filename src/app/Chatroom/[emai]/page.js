@@ -36,21 +36,36 @@ const Chatroom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
     }, [userChat])
 
-    const chatSubmit = async () => {
-        if (chat.length > 0) {
-            setListner(!listner)
-            setChat("")
+   const chatSubmit = async () => {
+    if (chat.trim().length > 0) {
+        setListner(!listner);
+        setChat("");
 
+        try {
             const res = await fetch("https://chat-burst.vercel.app/api/chat", {
                 method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
                 body: JSON.stringify({
-                    chat: chat,
+                    chat,
                     name: loginUser.name,
-                    email: email
+                    email
                 })
-            })
+            });
+
+            if (!res.ok) {
+                const errorData = await res.json();
+                console.error("Error submitting chat:", errorData.error);
+                alert("Failed to submit chat. Please try again.");
+            }
+        } catch (error) {
+            console.error("Network error:", error);
+            alert("An error occurred while submitting chat. Please check your connection.");
         }
     }
+};
+
 
     return (
         <>
