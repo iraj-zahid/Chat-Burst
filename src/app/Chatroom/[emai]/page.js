@@ -64,7 +64,7 @@ const Chatroom = () => {
                             filterRandomUser && filterRandomUser.map((userRandom) => {
                                 return (
                                     <div className="flex w-full items-center gap-[1%]" key={userRandom.name}>
-                                        <Image src={`/${userRandom.imageName}`} width={20} height={20} className="w-10 max-[450px]:w-8 h-10 max-[450px]:h-8 rounded-full" alt="hey" />
+                                        <Image src={userRandom.imageName} width={20} height={20} className="w-10 max-[450px]:w-8 h-10 max-[450px]:h-8 rounded-full" alt="hey" />
                                         <p className="text-white lobster max-[450px]:ml-2 ml-4">{userRandom.name}</p>
                                     </div>
                                 )
