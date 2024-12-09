@@ -3,15 +3,15 @@ import mongoose, {Schema} from "mongoose";
 const chatSchema = new Schema({
     chat:{
         type: String,
-        require: true
+        required: true
     },
     name:{
         type: String,
-        require: true
+        required: true
     },
     email:{
         type: String,
-        require: true
+        required: true
     }
 },
 {
